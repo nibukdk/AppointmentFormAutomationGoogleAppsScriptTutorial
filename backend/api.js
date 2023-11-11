@@ -15,7 +15,10 @@ function doGet(e) {
                 newAppointmentData.time = param.time;
                 newAppointmentData.message = param.message;
 
-                return contentService(updateSheets(newAppointmentData));
+                return contentService(updateAppointmentDataInSheets(newAppointmentData));
+
+            case "markDocAsReviewed":
+                return contentService(docReviewStatusEventHandler(param.eventId));
 
             default:
                 return contentService({
