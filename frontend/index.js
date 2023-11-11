@@ -1,4 +1,4 @@
-const BASE_URL = "https://script.google.com/macros/s/AKfycbwawOd7PkOIF4ndLisZVD5bH8zlVLX6R5jayE1C8wMvSvvxEOmSFECEDnj8Lj0KULOu/exec";
+const BASE_URL = "";
 const PAYLOAD = {
     method: "GET",
     redirect: "follow",
