@@ -41,7 +41,7 @@ function addNewFormsDetailsToResponsedHandlerSheets() {
 
   if (formHandlerData.length <= 1) {
     console.log("Form handler data sheet is empty")
-    appointmentData.slice(1).forEach(row => formHandlerData.push([row[12], row[6], ""]))
+    appointmentData.slice(1).forEach(row => formHandlerData.push([row[12], row[6], "",""]))
 
   } else {
     console.log("In else block, form handler sheet is not empty")
@@ -52,7 +52,7 @@ function addNewFormsDetailsToResponsedHandlerSheets() {
     console.log("newFormIndexes are " + JSON.stringify(newFormIndexes))
     // return if there's no new form id to add
     if (newFormIndexes.length <= 0) return;
-    newFormIndexes.forEach(ind => formHandlerData.push([appointmentData[ind][12], appointmentData[ind][6], ""]))
+    newFormIndexes.forEach(ind => formHandlerData.push([appointmentData[ind][12], appointmentData[ind][6], "",""]))
   }
   // save new values
   formHandlerSheet.getRange(1, 1, formHandlerData.length, formHandlerData[0].length).setValues(formHandlerData);
