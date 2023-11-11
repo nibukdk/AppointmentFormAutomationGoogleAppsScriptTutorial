@@ -2,6 +2,11 @@ function createNewDocFromTemplate() {
   const sheet = ss.getSheetByName("Form_Responses_Handler");
   const data = sheet.getDataRange().getValues();
 
+  const calEventSheet = ss.getSheetByName("Cal_Events_Handler");
+  const calEventdata = calEventSheet.getDataRange().getValues();
+
+  const calEventIdFinder = (formId) => calEventdata.map(row => row[1] === formId ? row[0] : "").filter(String)[0] ?? "";
+
   for (let i = 1; i < data.length; i++) {
     // if doc has been created already then skip
     if (data[i][2] === "Yes") continue;
@@ -10,18 +15,21 @@ function createNewDocFromTemplate() {
     // get from first
     const form = FormApp.openById(data[i][0]);
     const formResponse = form.getResponses();
+
+    // get event id
     if (formResponse.length === 0) continue;
     // get only latest response
     let response = formResponse[formResponse.length - 1].getItemResponses();
 
     // skip this row if there's no response
     if (!response) continue;
-
+    const eventId = calEventIdFinder(data[i][0]);
     // else
-    let result = createDocument(response, DriveApp.getFileById(data[i][0]).getName());
+    let docLink = createDocument(response, DriveApp.getFileById(data[i][0]).getName(), eventId);
     // if succeeded change doc crated to "Yes"
-    if (result) {
+    if (docLink) {
       data[i][2] = "Yes";
+      data[i][3] = docLink
     }
 
   }
@@ -31,7 +39,7 @@ function createNewDocFromTemplate() {
 }
 
 
-function createDocument(responses, formName) {
+function createDocument(responses, formName, eventId) {
   const docFolder = DriveApp.getFolderById(DOCS_FOLDER_ID);
   const docTemplate = DriveApp.getFileById(TEMPLATE_ID);
 
@@ -48,6 +56,9 @@ function createDocument(responses, formName) {
 
   // get body of document
   const body = doc.getBody();
+
+  const docReviewStatusUpdateUrl = `${SCRIPT_URL}?reqType=markDocAsReviewed&eventId=${eventId}`
+
   try {
 
     // replace client details first
@@ -88,12 +99,33 @@ function createDocument(responses, formName) {
     body.replaceText("{{Question_10}}", responses[9].getItem().getTitle());
     body.replaceText("{{Response_Question_10}}", responses[9].getResponse());
 
-    return 200;
+    insertImageLink(body, docReviewStatusUpdateUrl)
+
+    return DriveApp.getFileById(templateCopy.getId()).getUrl();
 
   } catch (e) {
+    console.log(e);
     //  delete the duplicate file since filling data it was interrupted
     DriveApp.getFileById(templateCopy.getId()).setTrashed(true);
     return;
   }
+}
+
+function insertImageLink(body, link) {
+  // insert rest api link
+  const imageLinkText = body.findText("{{mark_as_reviewed_button}}");
+  let image = DriveApp.getFileById(MARK_REVIEWED_IMAGE_LINK_ID).getBlob();
+
+  if (!imageLinkText) return;
+
+  let textElement = imageLinkText.getElement();
+
+  textElement.setText("");
+
+  let img = textElement.getParent().asParagraph().insertInlineImage(0, image)
+
+  img.setWidth(200);
+  img.setHeight(200);
+  img.setLinkUrl(link)
 }
 
