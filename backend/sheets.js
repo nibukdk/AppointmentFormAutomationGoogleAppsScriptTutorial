@@ -19,8 +19,9 @@ function updateAppointmentDataInSheets(appointmentData = fakeAppointmentData) {
     const data = sheet.getDataRange().getValues();
     const currentTimeStamp = getReadableDate();
 
+    
     if (data.length === 1) {
-      data.push([currentTimeStamp, appointmentData.name, appointmentData.email, appointmentData.address, appointmentData.company, appointmentData.purpose, appointmentData.date, appointmentData.time, appointmentData.message])
+      data.push([currentTimeStamp, appointmentData.name, appointmentData.email, appointmentData.address, appointmentData.company, appointmentData.purpose, appointmentData.date, appointmentData.time, appointmentData.message,"","","","","",""])
     } else {
 
       for (let i = 1; i < data.length; i++) {
@@ -39,7 +40,7 @@ function updateAppointmentDataInSheets(appointmentData = fakeAppointmentData) {
           // if none match than append to new row
           if (i === data.length - 1) {
             console.log("Not match")
-            data.push([currentTimeStamp, appointmentData.name, appointmentData.email, appointmentData.address, appointmentData.company, appointmentData.purpose, appointmentData.date, appointmentData.time, appointmentData.message])
+            data.push([currentTimeStamp, appointmentData.name, appointmentData.email, appointmentData.address, appointmentData.company, appointmentData.purpose, appointmentData.date, appointmentData.time, appointmentData.message,"","","","","",""])
           }
         }
       }
