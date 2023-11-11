@@ -5,3 +5,5 @@ appsscript.json
 .claspignore
 
 macros.js
+
+backend/config.js
