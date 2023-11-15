@@ -84,15 +84,18 @@ function docLinkCalendarEventHandler() {
     const calSheet = ss.getSheetByName("Cal_Events_Handler");
     const calData = calSheet.getDataRange().getDisplayValues();
 
-    const formSheet = ss.getSheetByName("Form_Responses_Handler");
-    const formData = formSheet.getDataRange().getDisplayValues();
+    
+
+    const formHandlerSheet = ss.getSheetByName("Form_Responses_Handler");
+    const formHandlerData = formHandlerSheet.getDataRange().getValues();
+
     for (let i = 1; i < calData.length; i++) {
         if (calData[i][2] != "Yes") {
 
-            let docLink = formData.map(row => row[0] === calData[i][1] ? row[3] : "").filter(String)[0];
+            let docLink = formHandlerData.map(row => row[0] === calData[i][1] ? row[2] : "").filter(String)[0];
 
             if (!docLink) continue;//if doc link is empty then skip the loop
-            
+
             let status = addDocLinkToCalendarEvent(calData[i][0], docLink);
             if (status) {
                 updateDocLinkStatusToCalendarSheets(calData[i][0]);

@@ -1,19 +1,20 @@
 function createNewDocFromTemplate() {
-  const sheet = ss.getSheetByName("Form_Responses_Handler");
-  const data = sheet.getDataRange().getValues();
 
+  const formHandlerSheet = ss.getSheetByName("Form_Responses_Handler");
+  const formHandlerData = formHandlerSheet.getDataRange().getValues();
+  
   const calEventSheet = ss.getSheetByName("Cal_Events_Handler");
   const calEventdata = calEventSheet.getDataRange().getValues();
 
   const calEventIdFinder = (formId) => calEventdata.map(row => row[1] === formId ? row[0] : "").filter(String)[0] ?? "";
 
-  for (let i = 1; i < data.length; i++) {
+  for (let i = 1; i < formHandlerData.length; i++) {
     // if doc has been created already then skip
-    if (data[i][2] === "Yes") continue;
+    if (formHandlerData[i][1] === "Yes") continue;
 
     // else
     // get from first
-    const form = FormApp.openById(data[i][0]);
+    const form = FormApp.openById(formHandlerData[i][0]);
     const formResponse = form.getResponses();
 
     // get event id
@@ -23,18 +24,18 @@ function createNewDocFromTemplate() {
 
     // skip this row if there's no response
     if (!response) continue;
-    const eventId = calEventIdFinder(data[i][0]);
+    const eventId = calEventIdFinder(formHandlerData[i][0]);
     // else
-    let docLink = createDocument(response, DriveApp.getFileById(data[i][0]).getName(), eventId);
+    let docLink = createDocument(response, DriveApp.getFileById(formHandlerData[i][0]).getName(), eventId);
     // if succeeded change doc crated to "Yes"
     if (docLink) {
-      data[i][2] = "Yes";
-      data[i][3] = docLink
+      formHandlerData[i][1] = "Yes";
+      formHandlerData[i][2] = docLink
     }
 
   }
 
-  sheet.getRange(1, 1, data.length, data[0].length).setValues(data);
+  formHandlerSheet.getRange(1, 1, formHandlerData.length, formHandlerData[0].length).setValues(formHandlerData);
 
 }
 
