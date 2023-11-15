@@ -62,7 +62,7 @@ function addNewFormsDetailsToResponsedHandlerSheets() {
 }
 
 
-function logResponses(formId = "1M0Ij3HXmnFtI1RHDc7vAgauyYeoIHcBLwOuOmuhBEVA") {
+/* function logResponses(formId = "1M0Ij3HXmnFtI1RHDc7vAgauyYeoIHcBLwOuOmuhBEVA") {
   const form = FormApp.openById(formId);
   // get only latest response
   let formResponses = form.getResponses()[0].getItemResponses();
@@ -73,4 +73,4 @@ function logResponses(formId = "1M0Ij3HXmnFtI1RHDc7vAgauyYeoIHcBLwOuOmuhBEVA") {
     console.log(`Response to the question '${itemResponse.getItem().getTitle()}' was
       '${itemResponse.getResponse()}'`);
   }
-}
+} */
