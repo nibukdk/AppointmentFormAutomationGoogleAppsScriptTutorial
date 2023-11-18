@@ -44,12 +44,12 @@ function addNewFormsDetailsToResponsedHandlerSheets() {
     appointmentData.slice(1).forEach(row => formHandlerData.push([row[12], "", ""]))
 
   } else {
-    console.log("In else block, form handler sheet is not empty")
+    //console.log("In else block, form handler sheet is not empty")
     const formHandlerFormIds = formHandlerSheet.getRange(2, 1, formHandlerData.length - 1, 1).getValues().flat();
-    console.log("formHandlerFormIds: " + JSON.stringify(formHandlerFormIds))
+  //  console.log("formHandlerFormIds: " + JSON.stringify(formHandlerFormIds))
     // only filter new ids from appointment sheet that are not present in form Handler sheets
     const newFormIndexes = appointmentDataFormIds.map((id, ind) => formHandlerFormIds.includes(id) ? "" : ind + 1).filter(String); // +1 because formHandlerFormIds has ireaton starting from row 2
-    console.log("newFormIndexes are " + JSON.stringify(newFormIndexes))
+    //console.log("newFormIndexes are " + JSON.stringify(newFormIndexes))
     // return if there's no new form id to add
     if (newFormIndexes.length <= 0) return;
     newFormIndexes.forEach(ind => formHandlerData.push([appointmentData[ind][12], "", ""]))

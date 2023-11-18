@@ -32,10 +32,7 @@ class LastUsedRowByFormProperty {
     // return cache and only if its empty return props
     return CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.LAST_USED_ROW_BY_FORM_CACHE)
       ?? PropertiesService.getScriptProperties().getProperty(SCRIPT_PROP_KEY.LAST_USED_ROW_BY_FORM);
-    /* CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.SCAN_STATUS_CACHE) !== null
-      ? CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.SCAN_STATUS_CACHE)
-      : PropertiesService.getScriptProperties().getProperty(SCRIPT_PROP_KEY.SCAN_STATUS);
- */
+    
   }
 }
 
@@ -52,10 +49,7 @@ class LastUsedRowByGmailProperty {
   static get() {
     // return cache and only if its empty return props
     return CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.LAST_USED_ROW_BY_GMAIL_CACHE) ?? PropertiesService.getScriptProperties().getProperty(SCRIPT_PROP_KEY.LAST_USED_ROW_BY_GMAIL);
-    /* CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.SCAN_STATUS_CACHE) !== null
-      ? CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.SCAN_STATUS_CACHE)
-      : PropertiesService.getScriptProperties().getProperty(SCRIPT_PROP_KEY.SCAN_STATUS);
- */
+    
   }
 }
 
@@ -71,10 +65,7 @@ class LastUsedRowByGPTProperty {
   static get() {
     // return cache and only if its empty return props
     return CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.LAST_USED_ROW_BY_GPT_CACHE) ?? PropertiesService.getScriptProperties().getProperty(SCRIPT_PROP_KEY.LAST_USED_ROW_BY_GPT);
-    /* CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.SCAN_STATUS_CACHE) !== null
-      ? CacheService.getScriptCache().get(SCRIPT_CACHE_KEY.SCAN_STATUS_CACHE)
-      : PropertiesService.getScriptProperties().getProperty(SCRIPT_PROP_KEY.SCAN_STATUS);
- */
+    
   }
 }
 
