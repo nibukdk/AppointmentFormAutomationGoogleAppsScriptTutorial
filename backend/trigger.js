@@ -7,7 +7,6 @@ function switchFunctionsToTrigger(previousTriggerProp) {
   switch (previousTriggerProp) {
     case FUNC_TO_TRIGGER_ENUM.UPDATE_CLAENDAR_EVENT_WITH_DOC_LINK:
       LastUsedTriggerProperty.set(FUNC_TO_TRIGGER_ENUM.CREATE_GPT_QUESIOTNS);
-      initalCalendarAppointmentEventHandler();//create event here; no need for trigger to a simulatenous event
       return updateSheetsWithGptQuestions; // create questions from gpt
 
     case FUNC_TO_TRIGGER_ENUM.CREATE_GPT_QUESIOTNS:
@@ -16,6 +15,7 @@ function switchFunctionsToTrigger(previousTriggerProp) {
 
     case FUNC_TO_TRIGGER_ENUM.CREATE_NEW_FORM:
       LastUsedTriggerProperty.set(FUNC_TO_TRIGGER_ENUM.SEND_EMAIL);
+      initalCalendarAppointmentEventHandler();//create event here; no need for trigger to a simulatenous event
       addNewFormsDetailsToResponsedHandlerSheets(); // also handle form spreadsheet operations
       return emailFormLinkToUser;
 
