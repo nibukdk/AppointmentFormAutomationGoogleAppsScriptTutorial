@@ -32,7 +32,8 @@ All the aforementioned automated processes can also be initiated manually throug
 
 For a comprehensive walkthrough of this project, please visit the following YouTube tutorial link:
 
-**[YouTube Tutorial Link]**
+[![Watch the Playlist From Here.](https://i.ytimg.com/vi/BQLA5McwmzY/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAAXyDNscHfs5x5xOF-nwTfdr3NHw)]( https://youtube.com/playlist?list=PLP-52qZqWEvkj_riD9IecYtJtYPvDzUFd&si=Nu4LqawDs8v--D1l)
+
 
 **Sharing and Recommendations:**
 
